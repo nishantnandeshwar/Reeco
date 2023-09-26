@@ -1,0 +1,30 @@
+.menu{
+    color: #fff;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.125rem;
+}
+
+.title-bold{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 2.125rem;
+    line-height: 1.5rem;
+    color: #1E293B;
+}
+
+.title-grey{
+color: #334155;
+font-style: normal;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+
+.title-grey-small{
+    color: #3b495c9e;
+    font-style: normal;
+        font-weight: 500;
+        font-size: 1rem;
+        line-height: 1.5rem;
+}
