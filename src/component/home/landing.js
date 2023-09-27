@@ -9,93 +9,89 @@ import {
 } from "../../assets/styles/styledComponent";
 import "./mainStyle.css";
 import PopUp from "../shared/popUp";
-
-const headerDetails = [
-  { id: 0, title: "supplier", description: "East coast fruits & vegetables" },
-  { id: 1, title: "shipping date", description: "Thu, Feb 10" },
-  { id: 2, title: "Total", description: "$15,0825" },
-  { id: 3, title: "Category", description: "🍕🍟🍿🥞🥙🥙" },
-  { id: 4, title: "Department", description: "300-444-678" },
-  { id: 5, title: "Status", description: "Awaiting your approvel" },
-];
-const headLine = [
-  { id: 0, title: "Product Name" },
-  { id: 1, title: "Brand" },
-  { id: 2, title: "Price" },
-  { id: 3, title: "Quantity" },
-  { id: 4, title: "Total" },
-  { id: 5, title: "Status" },
-];
+import { connect } from "react-redux";
+import { food } from "../../redux/dataSlice";
+import { headerDetails, headLine, dataValue } from "../utils/data";
+// const headerDetails = [
+//   { id: 0, title: "supplier", description: "East coast fruits & vegetables" },
+//   { id: 1, title: "shipping date", description: "Thu, Feb 10" },
+//   { id: 2, title: "Total", description: "$15,0825" },
+//   { id: 3, title: "Category", description: "🍕🍟🍿🥞🥙🥙" },
+//   { id: 4, title: "Department", description: "300-444-678" },
+//   { id: 5, title: "Status", description: "Awaiting your approvel" },
+// ];
+// const headLine = [
+//   { id: 0, title: "Product Name" },
+//   { id: 1, title: "Brand" },
+//   { id: 2, title: "Price" },
+//   { id: 3, title: "Quantity" },
+//   { id: 4, title: "Total" },
+//   { id: 5, title: "Status" },
+// ];
 
 class Landing extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      detailedItem: [
-        {
-          id: 0,
-          img: require("../../assets/image/AvocadoHass.jpg"),
-          productName:
-            "Chicken Breast Fillets, Boneless matuu maMarinated 6 Ounce Raw, Invivid",
-          branch: "Hormel Black Labelmany",
-          price: "60.56",
-          quantity: "0",
-          total: "$225",
-          status: "",
-        },
-        {
-          id: 1,
-          img: require("../../assets/image/AvocadoHass.jpg"),
-          productName:
-            "Chicken Breast Fillets, Boneless matuu maMarinated 6 Ounce Raw, Invivid",
-          branch: "Hormel Black Labelmany",
-          price: "60.56",
-          quantity: "0",
-          total: "$225",
-          status: "Missing-Urgent",
-        },
-        {
-          id: 2,
-          img: require("../../assets/image/AvocadoHass.jpg"),
-          productName:
-            "Chicken Breast Fillets, Boneless matuu maMarinated 6 Ounce Raw, Invivid",
-          branch: "Hormel Black Labelmany",
-          price: "60.56",
-          quantity: "1000",
-          total: "$225",
-          status: "Approved",
-        },
-        {
-          id: 3,
-          img: require("../../assets/image/AvocadoHass.jpg"),
-          productName:
-            "Chicken Breast Fillets, Boneless matuu maMarinated 6 Ounce Raw, Invivid",
-          branch: "Hormel Black Labelmany",
-          price: "60.56",
-          quantity: "0",
-          total: "$225",
-          status: "Missing",
-        },
-      ],
+      detailedItem: [],
       PopUpShow: false,
       title: "missing product",
       item: [],
-      type:""
+      type: "",
     };
   }
+  componentDidMount() {
+    {
+      this.props.readData.length === 0
+        ? this.setState({ detailedItem: dataValue })
+        : this.setState({ detailedItem: this.props.readData });
+    }
+    // this.setState({ detailedItem: this.props.readData });
+  }
   approveItem = (item) => {
-    const temp = this.state.detailedItem.filter(
-      (value) => value.id === item.id
+    console.log("approveItem item>>", item);
+    const updatedDetailedItem = this.state.detailedItem.map((el) =>
+      el.id === item.id ? Object.assign({}, el, { status: "Approved" }) : el
     );
-    this.setState({
-      detailedItem: [],
-    });
+    console.log("approveItem updatedDetailedItem>>", updatedDetailedItem);
+    this.setState({ detailedItem: updatedDetailedItem });
+    this.props.food(updatedDetailedItem);
+    // this.props.food([]);
   };
   updateStatus = (status, item) => {
     this.setState({ PopUpShow: false });
-    console.log("status,item>>", status, item);
+    const updatedDetailedItem = this.state.detailedItem.map((el) =>
+      el.id === item.id
+        ? Object.assign({}, el, {
+            status:
+              status === "NotUrgent"
+                ? "Missing"
+                : status === "Urgent"
+                ? "Missing-Urgent"
+                : "",
+          })
+        : el
+    );
+    console.log("updateStatus updatedDetailedItem>>", updatedDetailedItem);
+    this.setState({ detailedItem: updatedDetailedItem });
+    this.props.food(updatedDetailedItem);
+  };
+  sendItem = (send, item, price, quantity, reason) => {
+    const updatedDetailedItem = this.state.detailedItem.map((el) =>
+      el.id === item.id
+        ? Object.assign({}, el, {
+            price: price,
+            quantity: quantity,
+            total: price * quantity,
+          })
+        : el
+    );
+    console.log("sendItem updatedDetailedItem>>", updatedDetailedItem);
+    this.setState({ detailedItem: updatedDetailedItem, PopUpShow: false });
+    this.props.food(updatedDetailedItem);
   };
   render() {
+    console.log("this.props.readData>>", this.props.readData);
     return (
       <>
         <div className="landing-container">
@@ -106,7 +102,7 @@ class Landing extends Component {
                 className="dflex flexDirection-column text-align-start"
               >
                 <span className="title-grey">{item.title}</span>
-                <span>{item.description}</span>
+                <span className="title-bold-mid-size">{item.description}</span>
               </div>
             ))}
           </div>
@@ -140,23 +136,25 @@ class Landing extends Component {
                 ))}
               </div>
 
-              {this.state.detailedItem.map((item) => (
+              {this.state.detailedItem?.map((item) => (
                 <div
                   key={item.id}
                   className="dflex item-bottom alignItem-center"
                 >
-                  <spna
+                  <span
                     style={{ width: "25%" }}
                     className="dflex alignItem-center"
                   >
                     <img src={item.img} className="item-img" />
                     <span className="text-align-start">{item.productName}</span>
-                  </spna>
+                  </span>
                   <span style={{ width: "25%" }}>{item.branch}</span>
-                  <span style={{ width: "10%" }}>{item.price}</span>
-                  <span style={{ width: "10%" }}>{item.quantity}</span>
-                  <span style={{ width: "10%" }}>{item.total}</span>
-                  {/* <span style={{ width: "10%" }}>{item.status}</span> */}
+                  <span style={{ width: "10%" }}>{item.price}/6*1LB</span>
+                  <span style={{ width: "10%" }}>
+                    <span className="title-bold-mid-size">{item.quantity}</span>
+                    x6*1LB
+                  </span>
+                  <span style={{ width: "10%" }}>${item.total}</span>
                   {item.status ? (
                     <StyledStatusButton
                       primary={
@@ -176,6 +174,11 @@ class Landing extends Component {
                   )}
                   <span className="dflex flexDirection-row alignItem-center">
                     <img
+                      src={right}
+                      className="cross-right-icon margin-10px pointer"
+                      onClick={() => this.approveItem(item)}
+                    />
+                    <img
                       src={cross}
                       className="cross-right-icon margin-10px pointer"
                       onClick={() =>
@@ -183,15 +186,11 @@ class Landing extends Component {
                           PopUpShow: true,
                           title: "missing product",
                           item: item,
-                          type:"urgent"
+                          type: "urgent",
                         })
                       }
                     />
-                    <img
-                      src={right}
-                      className="cross-right-icon margin-10px pointer"
-                      onClick={(item) => this.approveItem(item)}
-                    />
+
                     <span
                       className="pointer"
                       onClick={() =>
@@ -199,7 +198,7 @@ class Landing extends Component {
                           PopUpShow: true,
                           title: "",
                           item: item,
-                          type:"edit"
+                          type: "edit",
                         })
                       }
                     >
@@ -215,14 +214,25 @@ class Landing extends Component {
           <PopUp
             title={this.state.title}
             item={this.state.item}
-            type = {this.state.type}
+            type={this.state.type}
             onDismiss={() => this.setState({ PopUpShow: false })}
             statusUpdate={(status, item) => this.updateStatus(status, item)}
-            send = {(send, item,price,quantity,reason)=>this.sendItem(send, item,price,quantity,reason)}
+            send={(send, item, price, quantity, reason) =>
+              this.sendItem(send, item, price, quantity, reason)
+            }
           />
         )}
       </>
     );
   }
 }
-export default Landing;
+
+const mapStateToProps = (state) => ({
+  readData: state.food.dataValue,
+});
+
+const mapDispatchToProps = {
+  food,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Landing);

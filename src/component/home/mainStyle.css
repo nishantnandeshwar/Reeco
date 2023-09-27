@@ -70,3 +70,6 @@ width: 20px;
 .status-style{
     margin: 0px 1rem;
 }
+.underLine{
+    text-decoration: underline;
+}

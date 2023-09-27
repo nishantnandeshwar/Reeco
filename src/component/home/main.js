@@ -15,10 +15,10 @@ class MainScreen extends Component {
       <div>
         <div className="header-container">
           <div className="dflex alignItem-center header-margin">
-            <span className="menu pointer">Reeco</span>
+            <span className="large-menu pointer">Reeco</span>
             <span className="dflex">
               {menuTitle.map((item, id) => (
-                <ul key={id} className="menu pointer">
+                <ul key={id} className={"menu pointer"}>
                   {item}
                 </ul>
               ))}
@@ -32,16 +32,11 @@ class MainScreen extends Component {
         </div>
         <Card>
           <div>
-            <div style={{ flexDirection: "row", display: "flex" }}>
-              <span>Order {">"} Order 32222</span>
+            <div className="dflex flexDirection-row">
+              <span className="title-grey-small-text">Order {">"} <span className="underLine">Order 32222</span></span>
             </div>
             <div
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                display: "flex",
-              }}
-            >
+            className="dflex flexDirection-row justifyCont-space-between">
               <div>
                 <span className="title-bold">Order 32222</span>
               </div>

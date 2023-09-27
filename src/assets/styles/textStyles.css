@@ -4,20 +4,39 @@
     font-weight: 500;
     font-size: 1.125rem;
 }
+.large-menu{
+    color: #fff;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.5rem;
+}
 
 .title-bold{
     font-style: normal;
     font-weight: 700;
-    font-size: 2.125rem;
-    line-height: 1.5rem;
+    font-size: 1.5rem;
+    line-height: 1.2rem;
     color: #1E293B;
 }
-
-.title-grey{
-color: #334155;
-font-style: normal;
-    font-weight: 500;
+.title-bold-mid-size{
+    font-style: normal;
+    font-weight: 700;
     font-size: 1rem;
+    line-height: 1.2rem;
+    color: #1E293B;
+}
+.title-bold-mid-large-size{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+    color: #1E293B;
+}
+.title-grey{
+    color: #334155;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 0.9rem;
     line-height: 1.5rem;
 }
 
@@ -26,5 +45,13 @@ font-style: normal;
     font-style: normal;
         font-weight: 500;
         font-size: 1rem;
+        line-height: 1.5rem;
+}
+
+.title-grey-small-text{
+    color: #3b495c9e;
+    font-style: normal;
+        font-weight: 500;
+        font-size: 0.8rem;
         line-height: 1.5rem;
 }
