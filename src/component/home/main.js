@@ -13,8 +13,8 @@ class MainScreen extends Component {
   render() {
     return (
       <div>
-        <div className="header-container">
-          <div className="dflex alignItem-center header-margin">
+        <div className="header-container overflow-x">
+          <div className="dflex alignItem-center header-margin overflow-x">
             <span className="large-menu pointer">Reeco</span>
             <span className="dflex">
               {menuTitle.map((item, id) => (

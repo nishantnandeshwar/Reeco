@@ -73,3 +73,6 @@ width: 20px;
 .underLine{
     text-decoration: underline;
 }
+.overflow-x{
+    overflow-x: auto;
+}

@@ -46,17 +46,13 @@ class Landing extends Component {
         ? this.setState({ detailedItem: dataValue })
         : this.setState({ detailedItem: this.props.readData });
     }
-    // this.setState({ detailedItem: this.props.readData });
   }
   approveItem = (item) => {
-    console.log("approveItem item>>", item);
     const updatedDetailedItem = this.state.detailedItem.map((el) =>
       el.id === item.id ? Object.assign({}, el, { status: "Approved" }) : el
     );
-    console.log("approveItem updatedDetailedItem>>", updatedDetailedItem);
     this.setState({ detailedItem: updatedDetailedItem });
     this.props.food(updatedDetailedItem);
-    // this.props.food([]);
   };
   updateStatus = (status, item) => {
     this.setState({ PopUpShow: false });
@@ -72,7 +68,6 @@ class Landing extends Component {
           })
         : el
     );
-    console.log("updateStatus updatedDetailedItem>>", updatedDetailedItem);
     this.setState({ detailedItem: updatedDetailedItem });
     this.props.food(updatedDetailedItem);
   };
@@ -86,12 +81,10 @@ class Landing extends Component {
           })
         : el
     );
-    console.log("sendItem updatedDetailedItem>>", updatedDetailedItem);
     this.setState({ detailedItem: updatedDetailedItem, PopUpShow: false });
     this.props.food(updatedDetailedItem);
   };
   render() {
-    console.log("this.props.readData>>", this.props.readData);
     return (
       <>
         <div className="landing-container">
@@ -99,14 +92,14 @@ class Landing extends Component {
             {headerDetails.map((item) => (
               <div
                 key={item.id}
-                className="dflex flexDirection-column text-align-start"
+                className="dflex flexDirection-column text-align-start vertical-bar"
               >
                 <span className="title-grey">{item.title}</span>
                 <span className="title-bold-mid-size">{item.description}</span>
               </div>
             ))}
           </div>
-          <div className="landing-border title-cont">
+          <div className="landing-border title-cont overflow-x">
             <div className="dflex alignItem-center justifyCont-space-between padding-1025">
               <div className="search-bar alignItem-center dflex">
                 <input
