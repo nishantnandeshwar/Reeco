@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import cross from "../../assets/image/cancel.svg";
 import right from "../../assets/image/done.svg";
-import printer from "../../assets/image/printer.png";
-import search from "../../assets/image/search.png";
 import {
-  StyledButton,
   StyledStatusButton,
 } from "../../assets/styles/styledComponent";
 import "./mainStyle.css";
@@ -12,22 +9,6 @@ import PopUp from "../shared/popUp";
 import { connect } from "react-redux";
 import { food } from "../../redux/dataSlice";
 import { headerDetails, headLine, dataValue } from "../utils/data";
-// const headerDetails = [
-//   { id: 0, title: "supplier", description: "East coast fruits & vegetables" },
-//   { id: 1, title: "shipping date", description: "Thu, Feb 10" },
-//   { id: 2, title: "Total", description: "$15,0825" },
-//   { id: 3, title: "Category", description: "🍕🍟🍿🥞🥙🥙" },
-//   { id: 4, title: "Department", description: "300-444-678" },
-//   { id: 5, title: "Status", description: "Awaiting your approvel" },
-// ];
-// const headLine = [
-//   { id: 0, title: "Product Name" },
-//   { id: 1, title: "Brand" },
-//   { id: 2, title: "Price" },
-//   { id: 3, title: "Quantity" },
-//   { id: 4, title: "Total" },
-//   { id: 5, title: "Status" },
-// ];
 
 class Landing extends Component {
   constructor(props) {
@@ -100,20 +81,6 @@ class Landing extends Component {
             ))}
           </div>
           <div className="landing-border title-cont overflow-x">
-            <div className="dflex alignItem-center justifyCont-space-between padding-1025">
-              <div className="search-bar alignItem-center dflex">
-                <input
-                  type="text"
-                  className="search-inside"
-                  placeholder="search...."
-                />
-                <img src={search} className="search-icon" />
-              </div>
-              <div className="dflex alignItem-center justifyCont-space-between">
-                <StyledButton>Back</StyledButton>
-                <img src={printer} className="cart" />
-              </div>
-            </div>
             <div>
               <div className="dflex">
                 {headLine.map((item) => (

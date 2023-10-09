@@ -70,9 +70,17 @@ width: 20px;
 .status-style{
     margin: 0px 1rem;
 }
-.underLine{
-    text-decoration: underline;
-}
+
 .overflow-x{
     overflow-x: auto;
 }
+
+.custom-link {
+    color: white; 
+    text-decoration: none; 
+    transition: text-decoration 0.2s; 
+  }
+  
+  .custom-link:hover {
+    text-decoration: underline; 
+  }

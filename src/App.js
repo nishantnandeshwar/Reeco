@@ -1,11 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
-import MainScreen from './component/home/main';
+import logo from "./logo.svg";
+import "./App.css";
+import MainScreen from "./component/home/main";
+import Navigation from "./component/shared/navigation";
 
 function App() {
   return (
     <div className="App">
-      <MainScreen />
+      {/* <MainScreen /> */}
+      <Navigation/>
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
